@@ -1,0 +1,29 @@
+{
+  "name": "files-exist",
+  "version": "1.0.0",
+  "description": "Verify that all the filenames in an array are existing files",
+  "main": "lib/files-exist.js",
+  "scripts": {
+    "test": "mocha",
+    "test-cov": "istanbul cover _mocha"
+  },
+  "keywords": [
+    "files",
+    "exist",
+    "glob",
+    "build",
+    "testing"
+  ],
+  "author": "Niko Salminen",
+  "license": "MIT",
+  "dependencies": {
+    "defaults": "^1.0.3",
+    "glob": "^6.0.2"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "gulp": "^3.9.0",
+    "istanbul": "^0.4.1",
+    "mocha": "^2.3.4"
+  }
+}
