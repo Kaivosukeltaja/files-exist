@@ -20,10 +20,10 @@ filesExist = require('files-exist');
 describe('images', function() {
   it('should contain at least one .png file', function() {
     var fileArray = ['images/*.png'];
-    
+
     // Method one: pass a bound call and check for thrown errors
     chai.expect(filesExist.bind(filesExist, fileArray, { checkGlobs: true })).to.not.throw(Error);
-    
+
     // Method two: suppress errors and check the returned results
     var results = filesExist(fileArray, { checkGlobs: true, throwOnMissing: false });
     chai.expect('images/*.png' in results).to.not.equal(false);
@@ -45,7 +45,25 @@ var jsLibs = [
 ];
 
 gulp.task('build:js', function() {
-  return gulp.src(filesExist(jsLibs, { errorMessage: 'Please run `bower install` to install missing library' }))
+  return gulp.src(filesExist(jsLibs, { exceptionMessage: 'Please run `bower install` to install missing library' }))
   .pipe(gulp.dest(outputPath + '/js'));
 });
 ```
+
+## Options
+
+### checkGlobs
+
+By default, `files-exist` doesn't check whether globs match any files. Set this to `true` to enable glob evaluation.
+
+### throwOnMissing
+
+Set this to `false` if you don't want `files-exist` to throw any exceptions when missing files are encountered. Note that you'll need to check the returned array yourself in this case, as it will be returned without the missing files.
+
+### exceptionClass
+
+Set the name of the exception class you want to use for the error message. Defaults to `Error`.
+
+### exceptionMessage
+
+Customize the message of the exception. The name of the first missing file encountered will be appended.
