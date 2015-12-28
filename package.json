@@ -10,7 +10,7 @@
   "bugs": "https://github.com/Kaivosukeltaja/files-exist/issues",
   "scripts": {
     "test": "mocha",
-    "test-cov": "istanbul cover _mocha"
+    "test-cov": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "keywords": [
     "files",
@@ -27,8 +27,10 @@
   },
   "devDependencies": {
     "chai": "^3.4.1",
+    "coveralls": "^2.11.6",
     "gulp": "^3.9.0",
     "istanbul": "^0.4.1",
-    "mocha": "^2.3.4"
+    "mocha": "^2.3.4",
+    "mocha-lcov-reporter": "^1.0.0"
   }
 }
