@@ -22,14 +22,18 @@ describe("filesExist", function() {
   it('should return an array without the missing files when throwOnMissing is false', function() {
     var fileArray = ['package.json', 'test/tests.js', 'foo.bar', 'lib/files-exist.js'],
     expectedArray = ['package.json', 'test/tests.js', 'lib/files-exist.js'],
+    resultArray;
+    chai.expect(filesExist.bind(filesExist, fileArray, { throwOnMissing: false })).to.not.throw(Error);
     resultArray = filesExist(fileArray, { throwOnMissing: false });
     chai.expect(expectedArray).to.deep.equal(resultArray);
+    chai.expect('foo.bar' in resultArray).to.equal(false);
   });
 
   it('should allow changing the exception message', function() {
     var fileArray = ['foo.bar'],
     options = { exceptionMessage: 'This is an exception' };
     chai.expect(filesExist.bind(filesExist, fileArray, options)).to.throw('This is an exception: foo.bar');
+    chai.expect(filesExist.bind(filesExist, fileArray, options)).to.throw(Error);
   });
 
   it('should ignore missing globs by default', function() {
