@@ -14,7 +14,7 @@ describe("filesExist", function() {
   });
 
   it('should return an identical array for existing files', function() {
-    var fileArray = ['package.json', 'test/tests.js', 'lib/files-exist.js'];
+    var fileArray = ['package.json', 'test/tests.js', 'lib/files-exist.js'],
     resultArray = filesExist(fileArray);
     chai.expect(fileArray).to.deep.equal(resultArray);
   });
