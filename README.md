@@ -1,6 +1,8 @@
 # files-exist
 This simple tool accepts an array of filenames with or without globbing wildcards and returns an identical array if all the filenames point to existing files on the file system.
 
+[![Build Status](https://travis-ci.org/Kaivosukeltaja/files-exist.svg?branch=master)](https://travis-ci.org/Kaivosukeltaja/files-exist)
+
 Basic usage:
 ```javascript
 var filesExist = require('files-exist'),
