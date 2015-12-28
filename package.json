@@ -7,6 +7,7 @@
     "type": "git",
     "url": "https://github.com/Kaivosukeltaja/files-exist"
   },
+  "bugs": "https://github.com/Kaivosukeltaja/files-exist/issues",
   "scripts": {
     "test": "mocha",
     "test-cov": "istanbul cover _mocha"
