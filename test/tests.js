@@ -13,6 +13,31 @@ describe("filesExist", function() {
     chai.expect(filesExist.bind(filesExist, fileArray)).to.throw('A required file is missing: foo.bar');
   });
 
+  it('should ignore file paths which start with exclamation mark. (gulp not syntax)', function() {
+    var fileArray = [ '!foo.bar'];
+    var resultArray = filesExist(fileArray);
+
+    chai.expect(fileArray).to.deep.equal(resultArray);
+  });
+
+  it('should automatically return a single element array if argument for fileExists is not an array but a string value', function() {
+    var fileArg = 'package.json';
+    var resultArray = filesExist(fileArg);
+
+    chai.expect(resultArray).to.deep.equal([ fileArg ]);
+  });
+
+  it('should ignore excepted files and check the others for existence and fail if one is missing', function() {
+    var fileArray = [ '!foo.bar', 'bar.foo'];
+    chai.expect(filesExist.bind(filesExist, fileArray)).to.throw('A required file is missing: bar.foo');
+  });
+
+  it('should work with excepted file and a existing files', function() {
+    var fileArray = ['package.json', 'test/tests.js', '!lib/files-exist.js'];
+    var resultArray = filesExist(fileArray);
+    chai.expect(resultArray).to.deep.equal(fileArray);
+  });
+
   it('should return an identical array for existing files', function() {
     var fileArray = ['package.json', 'test/tests.js', 'lib/files-exist.js'],
     resultArray = filesExist(fileArray);
