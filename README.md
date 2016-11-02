@@ -3,7 +3,7 @@
 [![Coverage Status](https://coveralls.io/repos/Kaivosukeltaja/files-exist/badge.svg?branch=master&service=github)](https://coveralls.io/github/Kaivosukeltaja/files-exist?branch=master)
 [![Build Status](https://travis-ci.org/Kaivosukeltaja/files-exist.svg?branch=master)](https://travis-ci.org/Kaivosukeltaja/files-exist)
 
-This simple tool accepts an array of filenames with or without globbing wildcards and returns an identical array if all the filenames point to existing files on the file system.
+This simple tool accepts an array of filenames (or a single filename as a string) with or without globbing wildcards and returns an identical array if all the filenames point to existing files on the file system.
 
 Basic usage:
 ```javascript
@@ -19,13 +19,13 @@ filesExist = require('files-exist');
 
 describe('images', function() {
   it('should contain at least one .png file', function() {
-    var fileArray = ['images/*.png'];
+    var files = 'images/*.png';
 
     // Method one: pass a bound call and check for thrown errors
-    chai.expect(filesExist.bind(filesExist, fileArray, { checkGlobs: true })).to.not.throw(Error);
+    chai.expect(filesExist.bind(filesExist, files, { checkGlobs: true })).to.not.throw(Error);
 
     // Method two: suppress errors and check the returned results
-    var results = filesExist(fileArray, { checkGlobs: true, throwOnMissing: false });
+    var results = filesExist(files, { checkGlobs: true, throwOnMissing: false });
     chai.expect('images/*.png' in results).to.not.equal(false);
   });
 });
@@ -36,12 +36,14 @@ Use `files-exist` around your `gulp.src()` source files to notice when a soft de
 
 ```javascript
 var jsLibs = [
-    sourcePath + '/vendor/jquery/dist/jquery.js',
-    sourcePath + '/vendor/jquery.stellar/jquery.stellar.min.js',
-    sourcePath + '/vendor/autofill-event/src/autofill-event.js',
-    sourcePath + '/vendor/js-cookie/src/js.cookie.js',
-    sourcePath + '/vendor/modernizr/modernizr.js',
-    sourcePath + '/vendor/lodash/lodash.js'
+    'vendor/jquery/dist/jquery.js',
+    'vendor/jquery.stellar/jquery.stellar.min.js',
+    'vendor/autofill-event/src/autofill-event.js',
+    'vendor/js-cookie/src/js.cookie.js',
+    'vendor/modernizr/modernizr.js',
+    'vendor/lodash/lodash.js',
+    'app/*.js',
+    '!app/config.js' // Items starting with an exclamation point are ignored
 ];
 
 gulp.task('build:js', function() {
@@ -67,3 +69,6 @@ Set the name of the exception class you want to use for the error message. Defau
 ### exceptionMessage
 
 Customize the message of the exception. The name of the first missing file encountered will be appended.
+
+# Thanks
+- [MartinKei](https://github.com/MartinKei) for string parameter and option to ignore files
