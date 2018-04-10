@@ -62,7 +62,12 @@ describe("filesExist", function() {
   });
 
   it('should allow throwing a custom exception class', function() {
-    class TestError extends Error {};
+    function TestError(message) {
+      this.name = 'TestError';
+      this.message = message;
+      this.stack = (new Error()).stack;
+    }
+    TestError.prototype = new Error;
     var fileArray = ['foo.bar'],
     options = { onMissing: function(file) {
       throw new TestError('Custom error for missing file: ' + file);
