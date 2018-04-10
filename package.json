@@ -1,6 +1,6 @@
 {
   "name": "files-exist",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Verify that all the filenames in an array are existing files",
   "main": "lib/files-exist.js",
   "repository": {
