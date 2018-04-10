@@ -58,6 +58,25 @@ gulp.task('build:js', function() {
 
 By default, `files-exist` doesn't check whether globs match any files. Set this to `true` to enable glob evaluation.
 
+### onMissing
+
+You can pass a callback function that gets called for every missing file. It will get one parameter, the name of the file or pattern that was not found. If you want to trigger an error, you may throw or return `false` from the callback.
+
+```
+options = { onMissing: function(file) {
+  throw new TestError('Custom error for missing file: ' + file);
+}};
+```
+
+Or alternatively:
+
+```
+options = { onMissing: function(file) {
+  console.log('File not found: ' + file);
+  return false;
+}};
+```
+
 ### throwOnMissing
 
 Set this to `false` if you don't want `files-exist` to throw any exceptions when missing files are encountered. Note that you'll need to check the returned array yourself in this case, as it will be returned without the missing files.

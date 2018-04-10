@@ -61,6 +61,22 @@ describe("filesExist", function() {
     chai.expect(filesExist.bind(filesExist, fileArray, options)).to.throw(Error);
   });
 
+  it('should allow throwing a custom exception class', function() {
+    class TestError extends Error {};
+    var fileArray = ['foo.bar'],
+    options = { onMissing: function(file) {
+      throw new TestError('Custom error for missing file: ' + file);
+    }};
+    chai.expect(filesExist.bind(filesExist, fileArray, options)).to.throw(TestError);
+  });
+
+  it('should resolve glob requests', function() {
+    var fileArray = ['lib/*.js', 'lib/*.foo'],
+    options = { checkGlobs: true, throwOnMissing: false };
+    var results = filesExist(fileArray, options);
+    chai.expect(results).to.deep.equal(['lib/*.js']);
+  });
+
   it('should ignore missing globs by default', function() {
     var fileArray = ['lib/*.png'],
     resultArray = filesExist(fileArray);
