@@ -2,6 +2,7 @@
 
 [![Coverage Status](https://coveralls.io/repos/Kaivosukeltaja/files-exist/badge.svg?branch=master&service=github)](https://coveralls.io/github/Kaivosukeltaja/files-exist?branch=master)
 [![Build Status](https://travis-ci.org/Kaivosukeltaja/files-exist.svg?branch=master)](https://travis-ci.org/Kaivosukeltaja/files-exist)
+[![Monthly Downloads](https://img.shields.io/npm/dm/files-exist.svg)](https://npm-stat.com/charts.html?package=files-exist)
 
 This simple tool accepts an array of filenames (or a single filename as a string) with or without globbing wildcards and returns an identical array if all the filenames point to existing files on the file system.
 
